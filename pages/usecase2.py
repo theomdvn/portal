@@ -11,7 +11,6 @@ import requests
 st.markdown("# Use Case 2 TAL ❄️")
 st.sidebar.markdown("# Use Case TAL ❄️")
 
-
 # --------------------------------------------------------------------------------- # 
 # --------------------------Data production---------------------------------------- # 
 # --------------------------------------------------------------------------------- # 
@@ -188,11 +187,11 @@ else:
 fig.update_layout(title='Currency Comparison',
                   xaxis_title='Date',
                   yaxis_title='Rate',
-    #  width=1200,
-    #  height=800
+      width=1000,
+      height=800
     )
 
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([2,1])
 
 col1.plotly_chart(fig)
 

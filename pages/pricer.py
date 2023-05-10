@@ -49,7 +49,7 @@ def conversion(from_currency, to_currency, amount):
     # Print the values
     #print("Converted Amount:", converted_amount)
     #print("Rate:", rate)
-    return float(response_data["convertedAmount"])
+    return round(float((response_data["convertedAmount"])),2)
 
 def rate_TAL_to_currency(currency):
     goldamount_in_usd = float(database.tail(1)['GLDUSD'] * 0.2)
@@ -81,7 +81,7 @@ with left_column:
     #qty = float(st.text_input("Which amount", key="qty"))
     if qty == "":
         qty = 0
-    output_amount = round(rate_currency_to_TAL(currency)*float(qty),4)
+    output_amount = round(rate_currency_to_TAL(currency)*float(qty),2)
     st.write(f"You will receive = {output_amount} TAL")
 
     
@@ -96,7 +96,7 @@ with left_column:
 
     data = pd.DataFrame({'Entry currency ': [currency], 'Entry amount ': [qty], 'TAL amount ': [output_amount]})
     repartition = pd.DataFrame({'Currency': ['CHF', 'EUR', 'GBP', 'JPY', 'CNY', 'SGD', 'Gold oz'],
-                            'Amount': [chf, eur, gbp, jpy, cny, sgd, gold],
+                            'Amount': [round(chf,2), round(eur,2), round(gbp,2), round(jpy,2), round(cny,2), round(sgd,2), gold],
                             f'Amount in {currency}': [conversion('CHF',currency,chf), conversion('EUR',currency,eur), conversion('GBP',currency,gbp), conversion('JPY',currency,jpy), conversion('CNY',currency,cny), conversion('SGD',currency,sgd), conversion('USD',currency,usd)]})
 
     fig = px.pie(repartition, values=f'Amount in {currency}', names=[f"{row['Currency']} - {round(row['Amount'],2)}" for _, row in repartition.iterrows()], title='Currency Repartition')#'Amount in {currency}'
@@ -125,7 +125,7 @@ with right_column:
     st.write(f"You will receive = {round(rate_TAL_to_currency(currency2)*float(qty2),4)} {currency2}")
 
 
-    data2 = pd.DataFrame({'TAL amount ': [qty2], 'Output amount ': [round(rate_TAL_to_currency(currency2)*float(qty2),4)], 'Output currency ': [currency2]})
+    data2 = pd.DataFrame({'TAL amount ': [qty2], 'Output amount ': [round(rate_TAL_to_currency(currency2)*float(qty2),2)], 'Output currency ': [currency2]})
 
     chf2 = qty2*100/1000
     eur2 = qty2*250/1000
