@@ -44,7 +44,6 @@ exceptiongroup==1.1.1
 executing==0.8.3
 fastjsonschema==2.15.3
 filelock==3.7.0
-fix-yahoo-finance==0.1.37
 fonttools==4.31.2
 frozendict==2.3.6
 geographiclib==1.52
