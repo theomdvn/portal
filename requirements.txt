@@ -59,8 +59,6 @@ idna==3.2
 importlib-metadata==6.6.0
 iniconfig==2.0.0
 ipykernel==6.12.1
-ipython==8.2.0
-ipython-genutils==0.2.0
 ipywidgets==7.7.0
 jdcal==1.4.1
 jedi==0.18.1
