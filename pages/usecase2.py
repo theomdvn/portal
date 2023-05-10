@@ -15,7 +15,7 @@ st.sidebar.markdown("# Use Case TAL ❄️")
 # --------------------------Data production---------------------------------------- # 
 # --------------------------------------------------------------------------------- # 
 
-df = pd.read_csv(r'C:\Users\theom\Desktop\INFRATAL\Streamlit\database\df_currency_10y22v4.csv', parse_dates=True)
+df = pd.read_csv(r'https://raw.githubusercontent.com/theomdvn/portal/master/database/df_currency_10y22v4.csv', parse_dates=True)
 df = df.drop(columns=['Unnamed: 0'])
 df.set_index('date', inplace=True)
 df['USDTAL'] = (1/df['USDCHF'])*100 + (1/df['USDEUR'])*250 + (1/df['USDGBP'])*50 + (1/df['USDJPY'])*18000 + (1/df['USDCNY'])*1600 + (1/df['USDSGD']*80) + ((df['USDGOLD'])*0.2)
