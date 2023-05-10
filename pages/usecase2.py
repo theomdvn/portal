@@ -7,7 +7,6 @@ import plotly_express as px
 import json
 import time
 import numpy as np
-import requests
 st.markdown("# Use Case 2 TAL ❄️")
 st.sidebar.markdown("# Use Case TAL ❄️")
 
