@@ -26,23 +26,23 @@ df['USDTAL'] = 1/df['USDTAL']
 # ---------------------------------Data Weights------------------------------------ #
 # --------------------------------------------------------------------------------- # 
 
-weights_m = pd.DataFrame([(1/df['USDCHF'])*100,(1/df['USDEUR'])*250,(1/df['USDGBP'])*50,(1/df['USDJPY'])*18000,(1/df['USDCNY'])*1600,(1/df['USDSGD'])*80,((df['USDGOLD'])*0.2)])
-weights_m = weights_m.T
-w_chf = weights_m['USDCHF'] / (1/df['USDTAL']*1000)
-w_eur = weights_m['USDEUR'] / (1/df['USDTAL']*1000)
-w_gbp = weights_m['USDGBP'] / (1/df['USDTAL']*1000)
-w_jpy = weights_m['USDJPY'] / (1/df['USDTAL']*1000)
-w_cny = weights_m['USDCNY'] / (1/df['USDTAL']*1000)
-w_sgd = weights_m['USDSGD'] / (1/df['USDTAL']*1000)
-w_gold = weights_m['USDGOLD'] / (1/df['USDTAL']*1000)
-weights_daily = pd.DataFrame([w_chf,w_eur,w_gbp,w_jpy,w_cny,w_sgd,w_gold])
-weights_daily = weights_daily.T
-weights_daily.columns = ['CHF','EUR','GBP','JPY','CNY','SGD','GOLD']
+# weights_m = pd.DataFrame([(1/df['USDCHF'])*100,(1/df['USDEUR'])*250,(1/df['USDGBP'])*50,(1/df['USDJPY'])*18000,(1/df['USDCNY'])*1600,(1/df['USDSGD'])*80,((df['USDGOLD'])*0.2)])
+# weights_m = weights_m.T
+# w_chf = weights_m['USDCHF'] / (1/df['USDTAL']*1000)
+# w_eur = weights_m['USDEUR'] / (1/df['USDTAL']*1000)
+# w_gbp = weights_m['USDGBP'] / (1/df['USDTAL']*1000)
+# w_jpy = weights_m['USDJPY'] / (1/df['USDTAL']*1000)
+# w_cny = weights_m['USDCNY'] / (1/df['USDTAL']*1000)
+# w_sgd = weights_m['USDSGD'] / (1/df['USDTAL']*1000)
+# w_gold = weights_m['USDGOLD'] / (1/df['USDTAL']*1000)
+# weights_daily = pd.DataFrame([w_chf,w_eur,w_gbp,w_jpy,w_cny,w_sgd,w_gold])
+# weights_daily = weights_daily.T
+# weights_daily.columns = ['CHF','EUR','GBP','JPY','CNY','SGD','GOLD']
 
 # --------------------------------------------------------------------------------- # 
-data_rdm = pd.read_csv(r'C:\Users\theom\Desktop\INFRATAL\tal_pricer\rdm_depots.csv')
-data_rdm.columns = data_rdm.iloc[0]
-data_rdm = data_rdm.drop(data_rdm.index[0])
+# data_rdm = pd.read_csv(r'C:\Users\theom\Desktop\INFRATAL\tal_pricer\rdm_depots.csv')
+# data_rdm.columns = data_rdm.iloc[0]
+# data_rdm = data_rdm.drop(data_rdm.index[0])
 def anyrate(df,from_currency,to_currency):
     x = (1/df[from_currency])*df[to_currency]
     return x
@@ -187,40 +187,37 @@ else:
 fig.update_layout(title='Currency Comparison',
                   xaxis_title='Date',
                   yaxis_title='Rate',
-      width=1000,
+      width=1200,
       height=800
     )
 
-col1, col2 = st.columns([2,1])
+st.plotly_chart(fig)
 
-col1.plotly_chart(fig)
+# col2.markdown("<h1 style='font-size:18px;'>Historic weights: </h1>", unsafe_allow_html=True)
+# w_date = col2.date_input('Select a date:',
+#                                  dt.date(2018, 3, 15))
+# w_date = w_date.strftime('%d/%m/%Y %H:%M')
+# specific_row = weights_daily.loc[w_date]
+# repartition = pd.DataFrame({'Currency': ['CHF', 'EUR', 'GBP', 'JPY', 'CNY', 'SGD', 'Gold'],
+#                             'Weights': [specific_row['CHF'], specific_row['EUR'], specific_row['GBP'], specific_row['JPY'], specific_row['CNY'], specific_row['SGD'], specific_row['GOLD']]})
 
+# fig_weights = px.pie(repartition, values='Weights', names='Currency', title='Currency Repartition')#'Amount in {currency}'
 
-col2.markdown("<h1 style='font-size:18px;'>Historic weights: </h1>", unsafe_allow_html=True)
-w_date = col2.date_input('Select a date:',
-                                 dt.date(2018, 3, 15))
-w_date = w_date.strftime('%d/%m/%Y %H:%M')
-specific_row = weights_daily.loc[w_date]
-repartition = pd.DataFrame({'Currency': ['CHF', 'EUR', 'GBP', 'JPY', 'CNY', 'SGD', 'Gold'],
-                            'Weights': [specific_row['CHF'], specific_row['EUR'], specific_row['GBP'], specific_row['JPY'], specific_row['CNY'], specific_row['SGD'], specific_row['GOLD']]})
+# col2.plotly_chart(fig_weights)
+# # Write text or annotations in the second column
 
-fig_weights = px.pie(repartition, values='Weights', names='Currency', title='Currency Repartition')#'Amount in {currency}'
+# # st.dataframe(weights_daily.sum(axis=1))
 
-col2.plotly_chart(fig_weights)
-# Write text or annotations in the second column
-
-# st.dataframe(weights_daily.sum(axis=1))
-
-fig_w = go.Figure()
-fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['CHF'], name='CHF'))
-fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['EUR'], name='EUR'))
-fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['GBP'], name='GBP'))
-fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['JPY'], name='JPY'))
-fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['CNY'], name='CNY'))
-fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['SGD'], name='SGD'))
-fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['GOLD'], name='GOLD'))
-fig_w.update_layout(title='Currency Weights')
-col2.plotly_chart(fig_w)
+# fig_w = go.Figure()
+# fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['CHF'], name='CHF'))
+# fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['EUR'], name='EUR'))
+# fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['GBP'], name='GBP'))
+# fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['JPY'], name='JPY'))
+# fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['CNY'], name='CNY'))
+# fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['SGD'], name='SGD'))
+# fig_w.add_trace(go.Scatter(x=weights_daily.index,y=weights_daily['GOLD'], name='GOLD'))
+# fig_w.update_layout(title='Currency Weights')
+# col2.plotly_chart(fig_w)
 
 
 tal_cur = tal_cur.pct_change()
@@ -247,8 +244,8 @@ statistics_compare = pd.DataFrame({
 statistics_compare.set_index('Currency', inplace=True)
 
 
-col1.markdown("<h1 style='font-size:18px;'>Statistics : </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='font-size:18px;'>Statistics : </h1>", unsafe_allow_html=True)
 
-col1.dataframe(statistics_tal_cur)
-col1.markdown('---')
-col1.dataframe(statistics_compare)
+st.dataframe(statistics_tal_cur)
+st.markdown('---')
+st.dataframe(statistics_compare)
