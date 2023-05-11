@@ -247,3 +247,23 @@ st.markdown("<h1 style='font-size:18px;'>Statistics : </h1>", unsafe_allow_html=
 st.dataframe(statistics_tal_cur)
 st.markdown('---')
 st.dataframe(statistics_compare)
+
+
+if st.checkbox('Learn more about statistics'):
+    st.markdown('---')
+    st.markdown('## Mean Return')
+    st.markdown("Rendement moyen) : Il s'agit de la moyenne des rendements d'un investissement sur une période donnée. Cela indique la performance moyenne d'un investissement sur cette période.")
+    st.markdown('---')
+    st.markdown('## Standard Deviation')
+    st.markdown("(Écart-type) : C'est une mesure de la dispersion des rendements d'un investissement par rapport à son rendement moyen. Plus l'écart-type est élevé, plus les rendements peuvent varier de manière significative par rapport à la moyenne.")
+    st.markdown('---')
+    st.markdown('## VaR')
+    st.markdown("(Value at Risk) : La VaR (ou valeur en risque) est une mesure statistique qui estime les pertes potentielles maximales (en termes de valeur monétaire) auxquelles un investissement ou un portefeuille peut être exposé, avec un certain niveau de confiance et sur une certaine période. Par exemple, une VaR de 5% à un horizon de 1 jour indique que les pertes ne dépasseront pas un certain montant avec une probabilité de 95% sur une journée.")
+    st.markdown('---')
+    st.markdown('## ES')
+    st.markdown("(Expected Shortfall) : L'ES (ou rendement espéré en cas de perte) est une autre mesure du risque qui complète la VaR. Il représente la moyenne des pertes qui dépassent la VaR. Par exemple, si la VaR est de 10 000 € avec une probabilité de 95%, l'ES pourrait être de 15 000 €, ce qui signifie que si les pertes dépassent la VaR, elles sont en moyenne de 15 000 €.")
+    st.markdown('---')
+    st.markdown('## Max Drawdown')
+    st.markdown("(Perte maximale) : Il s'agit de la plus grande baisse en pourcentage du prix ou de la valeur d'un investissement ou d'un portefeuille par rapport à son précédent sommet. Cela mesure la perte maximale subie par l'investissement depuis son pic jusqu'à son point le plus bas.")
+
+    
