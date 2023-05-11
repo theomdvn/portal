@@ -237,7 +237,7 @@ statistics_compare = pd.DataFrame({
     'Standard Deviation': [compare.std()],
     'VaR': [compare.quantile(0.05)],
     'ES': [compare[compare <= compare.quantile(0.05)].mean()],
-    'Max Drawdown': [compare.min() - compare.max()],
+    'Max Drawdown': [compare.min()],
 })
 statistics_compare.set_index('Currency', inplace=True)
 
@@ -263,7 +263,7 @@ if st.checkbox('Learn more about statistics'):
     st.markdown('## ES')
     st.markdown("(Expected Shortfall) : L'ES (ou rendement espéré en cas de perte) est une autre mesure du risque qui complète la VaR. Il représente la moyenne des pertes qui dépassent la VaR. Par exemple, si la VaR est de 10 000 € avec une probabilité de 95%, l'ES pourrait être de 15 000 €, ce qui signifie que si les pertes dépassent la VaR, elles sont en moyenne de 15 000 €.")
     st.markdown('---')
-    st.markdown('## Max Drawdown')
-    st.markdown("(Perte maximale) : Il s'agit de la plus grande baisse en pourcentage du prix ou de la valeur d'un investissement ou d'un portefeuille par rapport à son précédent sommet. Cela mesure la perte maximale subie par l'investissement depuis son pic jusqu'à son point le plus bas.")
+    st.markdown('## Max Drawdown a 1 jour')
+    st.markdown("(Perte maximale) : Il s'agit de la plus grande baisse en pourcentage du prix en une journée.")
 
 
