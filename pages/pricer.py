@@ -101,9 +101,6 @@ with left_column:
 
     fig = px.pie(repartition, values=f'Amount in {currency}', names=[f"{row['Currency']} - {round(row['Amount'],2)}" for _, row in repartition.iterrows()], title='Currency Repartition')#'Amount in {currency}'
 
-    if st.checkbox('Show pie chart with absolute values'):
-        # Update the traces to include the amount value inside the chart
-        fig.update_traces(textinfo='label+value', insidetextorientation='auto')
     # Display the plot using Streamlit
     st.plotly_chart(fig)
 
@@ -143,8 +140,6 @@ with right_column:
     # Plot the data in a pie chart
     fig2 = px.pie(repartition2, values=f'Amount in {currency2}', names=[f"{row['Currency']} - {round(row['Amount'],2)}" for _, row in repartition2.iterrows()], title='Currency Repartition')
 
-    if st.checkbox('Show pie chart with absolute values  '):
-        fig2.update_traces(textinfo='label+value', insidetextorientation='auto')
 
     st.plotly_chart(fig2)
    
