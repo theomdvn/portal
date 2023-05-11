@@ -21,12 +21,9 @@ st.title('JOUJOU TAL')
 #st.markdown("JOUJOU TAL")
 st.sidebar.markdown("# Main page ")
 
-
 # st.write('Welcome to my first Streamlit app!')
 
-
-
-    # Create a dropdown menu to select a currency
+# Create a dropdown menu to select a currency
 start_date = st.sidebar.date_input('Select start date:',
                                     dt.date(2018, 7, 17))
 start_date = start_date.strftime('%Y-%m-%d')

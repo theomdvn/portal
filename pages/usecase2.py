@@ -147,14 +147,13 @@ currency = st.sidebar.selectbox('Choose a currency to invest at date :', df.colu
 currency2 = st.sidebar.selectbox('Choose a currency into invest at date :', currencies)
 # --------------------------------------------------------------------------------- # 
 
-
 fig = go.Figure()
 
 talqty = qty*anyrate(filtered_df.loc[start_date],currency,'TAL')
 
-fig.add_trace(go.Scatter(x=filtered_df.index,y=np.full_like(filtered_df.index, qty), name=currency))
+fig.add_trace(go.Scatter(x=pd.to_datetime(filtered_df.index, format='%d/%m/%Y %H:%M'),y=np.full_like(filtered_df.index, qty), name=currency))
 tal_cur = talqty*anyrate(filtered_df,'TAL',currency)
-fig.add_trace(go.Scatter(x=filtered_df.index, y=tal_cur, name=f'TAL{currency}'))
+fig.add_trace(go.Scatter(x=pd.to_datetime(filtered_df.index, format='%d/%m/%Y %H:%M'), y=tal_cur, name=f'TAL{currency}'))
 
 if currency2 == 'BTC':
     usd_qty = qty*to_usd(filtered_df.loc[start_date],from_currency=currency)
@@ -162,7 +161,7 @@ if currency2 == 'BTC':
     btcqty_in_usd = (btcqty*filtered_df_btc['BTC'])
     #btc_cur = btcqty_in_usd*from_usd(filtered_df,currency)
     #st.write(btcqty)
-    fig.add_trace(go.Scatter(x=filtered_df.index, y=btcqty_in_usd, name=f'BTC{currency}'))
+    fig.add_trace(go.Scatter(x=pd.to_datetime(filtered_df.index, format='%d/%m/%Y %H:%M'), y=btcqty_in_usd, name=f'BTC{currency}'))
 
     #compare = btc_cur.pct_change()
     compare = btcqty_in_usd.pct_change()
@@ -173,13 +172,13 @@ elif currency2 == 'GOLD':
     gldqty = usd_qty*(1/filtered_df.loc[start_date]['GOLD'])
     gld_cur = (gldqty*filtered_df['GOLD'])*from_usd(filtered_df,currency)
 
-    fig.add_trace(go.Scatter(x=filtered_df.index, y=gld_cur, name=f'GLD{currency}'))
+    fig.add_trace(go.Scatter(x=pd.to_datetime(filtered_df.index, format='%d/%m/%Y %H:%M'), y=gld_cur, name=f'GLD{currency}'))
     compare = gld_cur.pct_change()
 
 else:
     currency_qty = qty*anyrate(filtered_df.loc[start_date],currency,currency2)
     cur2_cur = currency_qty*anyrate(filtered_df,currency2,currency) 
-    fig.add_trace(go.Scatter(x=filtered_df.index, y=cur2_cur, name=f'{currency2}{currency}'))
+    fig.add_trace(go.Scatter(x=pd.to_datetime(filtered_df.index, format='%d/%m/%Y %H:%M'), y=cur2_cur, name=f'{currency2}{currency}'))
     compare = cur2_cur.pct_change()
 
 

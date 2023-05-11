@@ -129,4 +129,6 @@ database['EURTAL'] = database['EURTAL']*0.001
 
 database['EURTAL'] = 1/database['EURTAL']
     
+database = database[::-1]
+
 st.write(database)
