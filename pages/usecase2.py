@@ -237,7 +237,7 @@ statistics_compare = pd.DataFrame({
     'Standard Deviation': [compare.std()],
     'VaR': [compare.quantile(0.05)],
     'ES': [compare[compare <= compare.quantile(0.05)].mean()],
-    'Max Drawdown': [compare.min()],
+    'Max Drawdown': [compare.min() - compare.max()],
 })
 statistics_compare.set_index('Currency', inplace=True)
 
@@ -266,4 +266,4 @@ if st.checkbox('Learn more about statistics'):
     st.markdown('## Max Drawdown')
     st.markdown("(Perte maximale) : Il s'agit de la plus grande baisse en pourcentage du prix ou de la valeur d'un investissement ou d'un portefeuille par rapport à son précédent sommet. Cela mesure la perte maximale subie par l'investissement depuis son pic jusqu'à son point le plus bas.")
 
-    
+
