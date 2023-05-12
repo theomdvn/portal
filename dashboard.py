@@ -11,11 +11,8 @@ import datapungi_fed as dpf
 import yfinance as yf
 from pages.database import database
 
-st.set_page_config(
-    page_title="JOUJOU TAL",
-    page_icon="✅",
-    layout="wide",
-)
+st.set_page_config(layout="wide")
+
 
 st.title('JOUJOU TAL')
 #st.markdown("JOUJOU TAL")

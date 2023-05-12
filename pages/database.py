@@ -10,6 +10,9 @@ import datetime
 import datapungi_fed as dpf
 import yfinance as yf
 
+st.set_page_config(layout="wide")
+
+
 st.markdown("# Database TAL ❄️")
 st.sidebar.markdown("# Database TAL ❄️")
 
