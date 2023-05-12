@@ -139,8 +139,9 @@ filtered_df_btc = df_btc.loc[start_date:end_date]
 
 
 
-qty = st.sidebar.number_input('Select quantity:', min_value=0, max_value=1000000000, value=0, step=1000)
+#qty = st.sidebar.number_input('Select quantity:', min_value=0, max_value=1000000000, value=0, step=1000)
 
+qty = 1000
 
 # Create a dropdown menu to select a currency
 currency = st.sidebar.selectbox('Choose a currency to invest at date :', df.columns)
